@@ -1,0 +1,44 @@
+
+body, html{
+  margin: 0px;
+  padding: 0px;
+}
+
+header{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(70, 134, 113);
+  color: white;
+  height: 50px;
+  align-items: center;
+}
+
+section{
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+}
+.courses{
+  display: flex;
+  flex-direction: column;
+}
+.course{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(215, 230, 225); 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding:10px
+}
+button{
+  width: 70px;
+  height: 50px;
+  border-radius: 7px;
+  background-color:rgb(123, 194, 170);
+  border: none;
+  color: white;
+  font-weight: bold;
+
+}
