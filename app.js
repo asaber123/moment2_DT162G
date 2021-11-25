@@ -6,9 +6,13 @@ var logger = require('morgan');
 
 
 var coursesRouter = require('./routes/courses');
+const { Mongoose } = require('mongoose');
 
 
 var app = express();
+
+// //Connecting to mongoDb
+Mongoose.connect('mongodb://localhost/courses');
 
 app.use(logger('dev'));
 app.use(express.json());
