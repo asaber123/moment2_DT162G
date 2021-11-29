@@ -3,16 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-
+const mongoose = require("mongoose");
 var coursesRouter = require('./routes/courses');
-const { Mongoose } = require('mongoose');
+
+
+
+//main().catch((err) => console.log(err));
+
+mongoose.connect(
+    "mongodb+srv://asaber123:mbhJoP@mycv.rjn8b.mongodb.net/myCV?retryWrites=true&w=majority", () =>console.log("Connected to db")
+  );
+
 
 
 var app = express();
 
-// //Connecting to mongoDb
-Mongoose.connect('mongodb://localhost/courses');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//Makes sure that if the course rout is called, then the functions gonna run. 
 app.use('/courses', coursesRouter);
 
 // catch 404 and forward to error handler
