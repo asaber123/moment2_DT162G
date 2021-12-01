@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+const { updateOne } = require('../models/Course');
 const Course = require('../models/Course')
 
 
@@ -71,5 +72,18 @@ router.delete('/:id', async (req, res) => {
     // res.send(`the course is deleted`);
 
 })
+
+//Update post
+router.patch('/:id', async (req,res) =>{
+    try{
+    const updatedCourse = await Course.updateOne({_id: req.params.id}, {$set:{title:req.body.title}});
+    res.json(updatedCourse);
+
+}
+catch(err){
+    res.json({message:err})
+}
+})
+
 
 module.exports = router;
