@@ -51,16 +51,24 @@ router.get('/:id', async (req, res) => {
     // if (!course) res.status(404).send('the course with given id is not found');
     // res.send(course);
 })
-
-router.delete('/:id', (req, res) => {
-    //Want to keep all courses, exept the one that has the same id as in the request parameter. 
-    const course = courses.find(course => course._id === parseInt(req.params.id));
-    if (!course) res.status(404).send('the course with given id is not found');
-    //Deleting object with the method indexOf to find the index of the item. 
-    const index = courses.indexOf(course);
-    //Using the method splice to remove an object from teh array. 
-    courses.splice(index, 1);
-    res.send(`the course is deleted`);
+//Delete post
+router.delete('/:id', async (req, res) => {
+    //Id that is send need to match with 
+    try{
+    const deletedCourse = await Course.remove({_id: req.params.id});
+    res.json(deletedCourse);
+    }
+    catch(err){
+        res.json({message:err})
+    }
+    // //Want to keep all courses, exept the one that has the same id as in the request parameter. 
+    // const course = courses.find(course => course._id === parseInt(req.params.id));
+    // if (!course) res.status(404).send('the course with given id is not found');
+    // //Deleting object with the method indexOf to find the index of the item. 
+    // const index = courses.indexOf(course);
+    // //Using the method splice to remove an object from teh array. 
+    // courses.splice(index, 1);
+    // res.send(`the course is deleted`);
 
 })
 
