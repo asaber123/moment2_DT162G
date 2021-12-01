@@ -1,11 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require("mongoose");
-var coursesRouter = require('./routes/courses');
-
+const coursesRouter = require('./routes/courses');
+const bodyParser = require('body-parser');
+const app = express();
 
 
 //main().catch((err) => console.log(err));
@@ -14,11 +15,7 @@ mongoose.connect(
     "mongodb+srv://asaber123:mbhJoP@mycv.rjn8b.mongodb.net/myCV?retryWrites=true&w=majority", () =>console.log("Connected to db")
   );
 
-
-
-var app = express();
-
-
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

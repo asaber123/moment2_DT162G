@@ -1,53 +1,55 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+const Course = require('../models/Course')
 
-
-// Create db schema
-const coursesSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    courseId: String,
-    courseName: String,
-    link: String,
-    progression: String,
-    term: String,
-});
-
-//compile courses schema to model
-module.exports = mongoose.model("course",coursesSchema)
-
-//const course = mongoose.model("courses", courses);
 
 //all routes in here are starting with /courses. 
-router.get('/', (req, res) => {
-    res.send(coursesSchema);
+
+//Get all courses
+router.get('/', async (req, res) => {
+    try{
+        const course = await Course.find();
+        res.json(course)
+    }catch(err){
+       res.json({message:err})
+    }
 });
 
 //Post courses, saving all items in the object. 
-router.post("/", async function (req, res, next) {
+router.post("/", async (req, res) => {
     //data to add
-    const addCourse = new course({
-        _id: new mongoose.Types.ObjectId(),
+    const addCourse = new Course({
+        //_id: new mongoose.Types.ObjectId(),
         courseId: req.body.courseId,
         courseName: req.body.courseName,
         link: req.body.link,
         progression: req.body.progression,
         term: req.body.term,
     });
-    //Saving data to database and print out a message. 
-    addCourse.save().then(result=>{
-        console.log(result);
-    })
-    .catch(err=> console.log(err));
+    //Saving data to database and print out a message to the sceen with the data that was sent. 
+    try{
+    const savedCourses = await post.save(); 
+    res.json(savedCourses);
+}//Send out an error message if post could not be sent
+    catch(err){
+        res.json({message:err})
+    }
 });
 
-
-router.get('/:id', (req, res) => {
+//Get specific post
+router.get('/:id', async (req, res) => {
+    try{
+    const course = await Course.findById(req.params.id);
+    res.json(course);}
+    catch(err){
+        res.json({message:err})
+    }
     //Storing id from requested parameters in the url.
     //Declring a variable that contains the course with the same id. Using the method .find to search and get ther right data with the same id as the parameter
-    const course = courses.find(course => course._id === parseInt(req.params.id));
-    if (!course) res.status(404).send('the course with given id is not found');
-    res.send(course);
+    // const course = courses.find(course => course._id === parseInt(req.params.id));
+    // if (!course) res.status(404).send('the course with given id is not found');
+    // res.send(course);
 })
 
 router.delete('/:id', (req, res) => {
