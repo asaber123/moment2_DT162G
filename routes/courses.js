@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     });
     //Saving data to database and print out a message to the sceen with the data that was sent. 
     try{
-    const savedCourses = await post.save(); 
+    const savedCourses = await Course.save(); 
     res.json(savedCourses);
 }//Send out an error message if post could not be sent
     catch(err){
