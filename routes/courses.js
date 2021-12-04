@@ -9,11 +9,11 @@ const Course = require('../models/Course')
 
 //Get all courses
 router.get('/', async (req, res) => {
-    try{
+    try {
         const course = await Course.find();
         res.json(course)
-    }catch(err){
-       res.json({message:err})
+    } catch (err) {
+        res.json({ message: err })
     }
 });
 
@@ -29,22 +29,24 @@ router.post("/", async (req, res) => {
         term: req.body.term,
     });
     //Saving data to database and print out a message to the sceen with the data that was sent. 
-    try{
-    const savedCourses = await Course.save(); 
-    res.json(savedCourses);
-}//Send out an error message if post could not be sent
-    catch(err){
-        res.json({message:err})
+    try {
+        const savedCourses = await Course.save();
+        res.json(savedCourses);
+    }
+    //Send out an error message if post could not be sent
+    catch (err) {
+        res.json({ message: err })
     }
 });
 
 //Get specific post
 router.get('/:id', async (req, res) => {
-    try{
-    const course = await Course.findById(req.params.id);
-    res.json(course);}
-    catch(err){
-        res.json({message:err})
+    try {
+        const course = await Course.findById(req.params.id);
+        res.json(course);
+    }
+    catch (err) {
+        res.json({ message: err })
     }
     //Storing id from requested parameters in the url.
     //Declring a variable that contains the course with the same id. Using the method .find to search and get ther right data with the same id as the parameter
@@ -55,12 +57,12 @@ router.get('/:id', async (req, res) => {
 //Delete post
 router.delete('/:id', async (req, res) => {
     //Id that is send need to match with 
-    try{
-    const deletedCourse = await Course.remove({_id: req.params.id});
-    res.json(deletedCourse);
+    try {
+        const deletedCourse = await Course.remove({ _id: req.params.id });
+        res.json(deletedCourse);
     }
-    catch(err){
-        res.json({message:err})
+    catch (err) {
+        res.json({ message: err })
     }
     // //Want to keep all courses, exept the one that has the same id as in the request parameter. 
     // const course = courses.find(course => course._id === parseInt(req.params.id));
@@ -74,15 +76,15 @@ router.delete('/:id', async (req, res) => {
 })
 
 //Update post
-router.patch('/:id', async (req,res) =>{
-    try{
-    const updatedCourse = await Course.updateOne({_id: req.params.id}, {$set:{title:req.body.title}});
-    res.json(updatedCourse);
+router.patch('/:id', async (req, res) => {
+    try {
+        const updatedCourse = await Course.updateOne({ _id: req.params.id }, { $set: { title: req.body.title } });
+        res.json(updatedCourse);
 
-}
-catch(err){
-    res.json({message:err})
-}
+    }
+    catch (err) {
+        res.json({ message: err })
+    }
 })
 
 
