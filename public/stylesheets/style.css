@@ -40,5 +40,34 @@ button{
   border: none;
   color: white;
   font-weight: bold;
+}
+button:hover{
+  background-color:rgb(66, 134, 112);
+}
+form{
+  width: 100%;
+  margin-bottom: 100px;
+}
+.text-field{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: 2px solid rgb(66, 134, 112);
+}
+label{
+  font-weight: bold;
+}
+.button1{
+  width: 100%;
+  height: 50px;
+  border-radius: 7px;
+  background-color:rgb(123, 194, 170);
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+.button1:hover{
+  background-color:rgb(66, 134, 112);
 
 }

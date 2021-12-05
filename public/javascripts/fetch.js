@@ -12,6 +12,8 @@ let termItem = document.getElementById("term");
 
 //Adding eventlisteners which will start different funcions on events. 
 window.addEventListener('load', getCourses);
+addCourseBtn.addEventListener('click', addCourse);
+
 
 
 //Function that gets data witg courses from the rest-api.
@@ -25,18 +27,18 @@ function getCourses() {
             data.forEach(course => {
                 coursesEL.innerHTML +=
                     "<div class='course'>" +
-                    "<p>" + course.courseId + " - " + course.courseName + " - " + course.link + " - " + course.progression + " - " + course.term + " - " + "</p>" +
+                    "<div><h2>" + course.courseName + "</h2><p>" + course.courseId + " <br> <a href=' " + course.link + "'>Kurslänk</a> <br> Progression: " + course.progression + " <br> Termin:  " + course.term +"</p></div>" +
                     "<div class='buttons'>" +
-                    "<button onclick='deleteCourse(" + course._id + ")'>Ta bort</button>" +
+                    "<button onclick='deleteCourse(" + course.courseId + ")'>Ta bort</button>" +
                     "</div>" +
                     "</div>";
             })
         })
 }
 //when delete button is clicked this funciton starts. 
-function deleteCourse(id) {
+function deleteCourse(courseId) {
     //Fetching the rest-api with delete request. 
-    fetch('http://localhost:3000/courses/' + id, {
+    fetch('http://localhost:3000/courses/' + courseId, {
         method: 'DELETE',
     })
         //After request is done courses are reloded again. 

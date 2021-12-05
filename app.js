@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const coursesRouter = require('./routes/courses');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 
 //main().catch((err) => console.log(err));
@@ -14,7 +15,8 @@ const app = express();
 mongoose.connect(
     "mongodb+srv://asaber123:mbhJoP@mycv.rjn8b.mongodb.net/myCV?retryWrites=true&w=majority", () =>console.log("Connected to db")
   );
-
+//Middlewere
+app.use(cors());
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
