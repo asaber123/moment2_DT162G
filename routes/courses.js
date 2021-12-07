@@ -59,7 +59,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     //Id that is send need to match with 
     try{
-    const deletedCourse = await Course.remove({_id: req.params.id});
+    const deletedCourse = await Course.remove({courseId: req.params.id});
     res.json(deletedCourse);
     }
     catch(err){

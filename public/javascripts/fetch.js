@@ -26,20 +26,18 @@ function getCourses() {
         .then((data) => {
             data.forEach(course => {
                 coursesEL.innerHTML +=
-                `<div class="course">
-                    <div><h2>${course.courseName}</h2><p>${course.courseId}<br><a href=${course.link}>Kurslänk</a> <br> Progression: ${course.progression} <br> Termin:  ${course.term}</p></div>
-                    <div class='buttons'>
-                        <button onclick=deleteCourse("${course.courseId}")>Ta bort</button>
-                    </div>
-                </div>`;
+                    "<div class='course'>" +
+                    "<div><h2>" + course.courseName + "</h2><p>" + course.courseId + " <br> <a href=' " + course.link + "'>Kurslänk</a> <br> Progression: " + course.progression + " <br> Termin:  " + course.term +"</p></div>" +
+                    "<div class='buttons'>" +
+                    "<button onclick='deleteCourse(\"" + course._id + "\")'>Ta bort</button>" +
+                    "</div>";
             })
         })
 }
 //when delete button is clicked this funciton starts. 
 function deleteCourse(_id) {
-    console.log("deleting")
     //Fetching the rest-api with delete request. 
-    fetch(`http://localhost:3000/courses/${_id}`, {
+    fetch('http://localhost:3000/courses/' + _id, {
         method: 'DELETE',
     })
         //After request is done courses are reloded again. 
@@ -56,6 +54,7 @@ function deleteCourse(_id) {
 //When the user in the admin page is filling in the form and klick the button "lägg till" this funciton will start
 function addCourse() {
     //Creating variables with the values that is inputed in the form
+
     let courseId = courseIdItem.value;
     let courseName = courseNameItem.value;
     let link = linkItem.value;
@@ -63,15 +62,18 @@ function addCourse() {
     let term = termItem.value;
 
     //Adding the values into the object course
-    let course = { 'courseId': courseId, 'courseName': courseName, 'link': link, 'progression': progression, 'term': term };
+    let course = { 'courseId': courseId, 'courseName': courseName,'link': link, 'progression': progression, 'term':term };
     //Fetching dtaa to courses api with the request post. 
     fetch("http://localhost:3000/courses/", {
         method: 'POST',
-        body: JSON.stringify(course), 
+        body: JSON.stringify(course),
+        headers: {
+          'Content-Type': 'application/json'
+        }        
     })
         .then(response => response.json())
         .then(data => {
-            //After request is done courses are reloded again. 
+        //After request is done courses are reloded again. 
             getCourses();
         })
         //If something goes wrong, an error message will be shown. 
