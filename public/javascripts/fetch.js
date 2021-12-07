@@ -26,19 +26,20 @@ function getCourses() {
         .then((data) => {
             data.forEach(course => {
                 coursesEL.innerHTML +=
-                    "<div class='course'>" +
-                    "<div><h2>" + course.courseName + "</h2><p>" + course.courseId + " <br> <a href=' " + course.link + "'>Kurslänk</a> <br> Progression: " + course.progression + " <br> Termin:  " + course.term +"</p></div>" +
-                    "<div class='buttons'>" +
-                    "<button onclick='deleteCourse(" + course.courseId + ")'>Ta bort</button>" +
-                    "</div>" +
-                    "</div>";
+                    `<div class="course">
+                        <div><h2>${course.courseName}</h2><p>${course.courseId}<br><a href=${course.link}>Kurslänk</a> <br> Progression: ${course.progression} <br> Termin:  ${course.term}</p></div>
+                        <div class='buttons'>
+                            <button onclick=deleteCourse("${course.courseId}")>Ta bort</button>
+                        </div>
+                    </div>`;
             })
         })
 }
 //when delete button is clicked this funciton starts. 
 function deleteCourse(courseId) {
+    console.log("deleting")
     //Fetching the rest-api with delete request. 
-    fetch('http://localhost:3000/courses/' + courseId, {
+    fetch(`http://localhost:3000/courses/${courseId}`, {
         method: 'DELETE',
     })
         //After request is done courses are reloded again. 
