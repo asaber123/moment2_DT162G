@@ -55,6 +55,9 @@ form{
   border: none;
   border-bottom: 2px solid rgb(66, 134, 112);
 }
+input:focus{
+  outline: none;
+}
 label{
   font-weight: bold;
 }
